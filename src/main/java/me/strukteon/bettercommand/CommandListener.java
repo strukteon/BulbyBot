@@ -54,6 +54,10 @@ public class CommandListener extends ListenerAdapter {
                         if (c.getCommandInfo().getCooldown() != 0)
                             if (cooldowns.containsKey(event.getAuthor().getId()) && cooldowns.get(event.getAuthor().getId()) + c.getCommandInfo().getCooldown() > System.currentTimeMillis())
                                 return;
+                        if (!(c.getPermissionManager().getLimitedUsers().size() == 0 || c.getPermissionManager().getLimitedUsers().contains(event.getAuthor().getId()))) {
+                            betterCommand.getErrorHandler().notInUserlist(commandEvent, c);
+                            return;
+                        }
                         if (c instanceof GuildCommand) {
                             Member author = event.getMember();
                             Member self = event.getGuild().getMember(event.getJDA().getSelfUser());
@@ -64,10 +68,7 @@ public class CommandListener extends ListenerAdapter {
                                 betterCommand.getErrorHandler().missingUserPermissions(commandEvent,
                                         CommandTools.getMissingPermissions(author.getPermissions(event.getTextChannel()), c.getPermissionManager().getRequiredUserPerms()),
                                         c);
-                            if (!(success = success && c.getPermissionManager().getLimitedUsers().size() == 0 || c.getPermissionManager().getLimitedUsers().contains(author.getUser().getId()))) {
-                                betterCommand.getErrorHandler().notInUserlist(commandEvent, c);
-                                return;
-                            }
+
                             if (!( self.hasPermission(Permission.ADMINISTRATOR) || self.hasPermission(c.getPermissionManager().getRequiredBotPerms()) )) {
                                 success = false;
                                 betterCommand.getErrorHandler().missingBotPermissions(commandEvent,
