@@ -64,8 +64,10 @@ public class CommandListener extends ListenerAdapter {
                                 betterCommand.getErrorHandler().missingUserPermissions(commandEvent,
                                         CommandTools.getMissingPermissions(author.getPermissions(event.getTextChannel()), c.getPermissionManager().getRequiredUserPerms()),
                                         c);
-                            if (!(success = success && c.getPermissionManager().getLimitedUsers().size() == 0 || c.getPermissionManager().getLimitedUsers().contains(author.getUser().getId())))
+                            if (!(success = success && c.getPermissionManager().getLimitedUsers().size() == 0 || c.getPermissionManager().getLimitedUsers().contains(author.getUser().getId()))) {
                                 betterCommand.getErrorHandler().notInUserlist(commandEvent, c);
+                                return;
+                            }
                             if (!( self.hasPermission(Permission.ADMINISTRATOR) || self.hasPermission(c.getPermissionManager().getRequiredBotPerms()) )) {
                                 success = false;
                                 betterCommand.getErrorHandler().missingBotPermissions(commandEvent,
