@@ -93,7 +93,7 @@ public class Shop implements ExtendedCommand {
                 .setAliases("store")
                 .setSyntaxBuilder(new SyntaxBuilder(
                         new SyntaxBuilder()
-                            .addSubcommand("mode", "buyid")
+                            .addSubcommand("mode", "buy")
                             .addElement("itemid", SyntaxElementType.INT),
                         new SyntaxBuilder()
                             .addSubcommand("mode", "buy")

@@ -60,6 +60,7 @@ public class SyntaxBuilder {
         Syntax syntax = new Syntax();
         syntax.setHelp(getAsHelp(command));
         int curElem = 0;
+        int elemNum = elements.size();
         List<Object> parsedList = null;
         if (elements.size() > 0)
             for (int i = 0; i < args.length; i++){
@@ -73,8 +74,10 @@ public class SyntaxBuilder {
                     Object parsed = validator.validate(s, e.element, event);
                     if (e.multiple) {
                         parsedList.add(parsed);
-                        if (i == args.length - 1)
+                        if (i == args.length - 1 || args.length - i == elemNum - curElem) {
                             syntax.put(e.element.getName(), parsedList);
+                            curElem++;
+                        }
                     } else {
                         syntax.put(e.element.getName(), parsed);
                         curElem++;
