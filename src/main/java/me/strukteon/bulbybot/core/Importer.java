@@ -46,9 +46,11 @@ public class Importer {
 
     public static void importListeners(DefaultShardManagerBuilder builder){
         builder
-                .addEventListeners(new ReadyListener())
-                .addEventListeners(new ReactionAddListener())
-                .addEventListeners(new XPListener())
-                ;
+                .addEventListeners(
+                        new ReadyListener(),
+                        new ReactionAddListener(),
+                        new XPListener()
+                );
+
     }
 }
