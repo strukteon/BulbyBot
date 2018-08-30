@@ -118,6 +118,19 @@ public class InventorySQL {
         return items;
     }
 
+    public List<InventoryItem> getAvailableItemsWithType(Item.Type itemType){
+        List<InventoryItem> items = new ArrayList<>();
+        try {
+            ResultSet res = mySQL.getConnection().prepareStatement(String.format("select * from %s where ownerid='%s' and itemtype='%s' and available=0", table, userid, itemType.name())).executeQuery();
+            while (res.next())
+                items.add(new InventoryItem(res.getInt("id"), res.getString("ownerid"), res.getInt("itemid"),
+                        InventoryItem.Availability.AVAILABLE));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return items;
+    }
+
     public static InventoryItem getInventoryItem(int inventoryId){
         Map<String, String> itemSet = mySQL.SELECT("*", table, "id=" + inventoryId);
         return new InventoryItem(itemSet.get("id"), itemSet.get("ownerid"), itemSet.get("itemid"), itemSet.get("available"));

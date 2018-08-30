@@ -6,14 +6,14 @@ package me.strukteon.bulbybot.utils;
 */
 
 import me.strukteon.bulbybot.core.sql.UserSQL;
+import me.strukteon.bulbybot.core.sql.inventory.InventoryItem;
 import me.strukteon.bulbybot.core.sql.inventory.InventorySQL;
 import me.strukteon.bulbybot.utils.items.Item;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.User;
 
 import java.awt.*;
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -55,6 +55,23 @@ public class ChatTools {
                 response.appendDescription("\n*" + i.toString() + "*");
         } else
             consumer.accept((E) items.toArray()[0]);
+    }
+
+    public static void getUniqueItemFromList(String name, EmbedBuilder response, List<InventoryItem> availableItems, String locationWhereAvailable, Consumer<InventoryItem> consumer){
+        Map<Integer, InventoryItem> uniqueAvailableItems = new HashMap<>();
+        availableItems.forEach(ii -> {
+            if (!uniqueAvailableItems.containsKey(ii.getItemId()))
+                uniqueAvailableItems.put(ii.getItemId(), ii);
+        });
+        Collection<InventoryItem> items = uniqueAvailableItems.values();
+        if (items.size() == 0) {
+            response.setDescription("Sorry, but no item with the name ``" + name + "`` is available in " + locationWhereAvailable + ".");
+        } else if (items.size() > 1) {
+            response.setDescription("I found more than one item containing this text. Please try it again with a more detailed name.");
+            for (InventoryItem i : items)
+                response.appendDescription("\n*" + i.toString() + "*");
+        } else
+            consumer.accept(items.toArray(new InventoryItem[0])[0]);
     }
 
     public static class CheckList {

@@ -52,9 +52,9 @@ public class Settings implements ExtendedCommand {
                         userSQL.setBio(syntax.getAsJoinedListString("value"));
                         response.setDescription("Your bio was set to: " + syntax.getAsJoinedListString("value"));
                     } else if (setting.equals("background") || setting.equals("bg")) {
-                        List<InventoryItem> availableItems = inventorySQL.getItemsWithType(Item.Type.BACKGROUND);
+                        List<InventoryItem> availableItems = inventorySQL.getAvailableItemsWithType(Item.Type.BACKGROUND);
                         String value = syntax.getAsJoinedListString("value").toLowerCase();
-                        ChatTools.getItemFromList(value, response, availableItems.stream().filter(ii -> ii.getItem().getName().toLowerCase().contains(value)).collect(Collectors.toList())
+                        ChatTools.getUniqueItemFromList(value, response, availableItems.stream().filter(ii -> ii.getItem().getName().toLowerCase().contains(value)).collect(Collectors.toList())
                                 , "your inventory", item -> {
                             if (item.getItemId() == inventorySQL.getUsedItem(Item.Type.BACKGROUND).getItemId())
                                 response.setDescription("You already have this item equipped!");
