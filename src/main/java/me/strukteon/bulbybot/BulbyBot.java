@@ -56,8 +56,8 @@ public class BulbyBot {
         DefaultShardManagerBuilder builder = new DefaultShardManagerBuilder();
         builder
                 .setToken(Settings.INSTANCE.token)
-                .setShards(Settings.INSTANCE.shardIds)
                 .setShardsTotal(Settings.INSTANCE.shardCount)
+                .setShards(Settings.INSTANCE.shardIds)
                 .setGame(Game.playing("they see me loading"))
                 .setStatus(OnlineStatus.DO_NOT_DISTURB);
 
