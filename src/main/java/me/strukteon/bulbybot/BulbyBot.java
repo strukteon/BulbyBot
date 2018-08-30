@@ -47,7 +47,12 @@ public class BulbyBot {
             CLI.error("An error occurred while trying to load the config: " + e.getMessage());
         }
 
-        CLI.info("BULBY STARTING....");
+        CLI.info("   __        _\n" +
+                "  /  )      // /\n" +
+                " /--<  . . // /____  ,\n" +
+                "/___/_(_/_</_/_)/ (_/_\n" +
+                "                   /  \n" +
+                "                  '");
 
         DefaultShardManagerBuilder builder = new DefaultShardManagerBuilder();
         builder
