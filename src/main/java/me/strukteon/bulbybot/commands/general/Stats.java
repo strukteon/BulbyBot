@@ -37,7 +37,7 @@ public class Stats implements ExtendedCommand {
         OperatingSystemMXBean operatingSystemMXBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
         DecimalFormat df = new DecimalFormat("###.##");
 
-        eb.setDescription(String.format("Online for: **%s**\nGuilds:  **%s**\nLatency: **%sms**\nRegistered users: **%s**\nCPU usage: **%s%%**, **%s%%** available\nRAM usage: **%sMB**, **%sGB** available\nShard: **%s** / **%s**",
+        eb.setDescription(String.format("Online for: **%s**\nGuilds: **%s**\nLatency: **%sms**\nRegistered users: **%s**\nCPU usage: **%s%%**, **%s%%** available\nRAM usage: **%sMB**, **%sGB** available\nShard: **%s** / **%s**",
                 onlineTime(System.currentTimeMillis() - BulbyBot.getStartTime()),
                 BulbyBot.getShardManager().getGuilds().size(),
                 BulbyBot.getShardManager().getAveragePing(),
