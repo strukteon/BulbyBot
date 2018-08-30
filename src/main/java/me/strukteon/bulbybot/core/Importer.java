@@ -9,10 +9,7 @@ import me.strukteon.bettercommand.BetterCommand;
 import me.strukteon.bulbybot.commands.dev.AddItem;
 import me.strukteon.bulbybot.commands.dev.AddMoney;
 import me.strukteon.bulbybot.commands.dev.ThrowException;
-import me.strukteon.bulbybot.commands.general.About;
-import me.strukteon.bulbybot.commands.general.Execute;
-import me.strukteon.bulbybot.commands.general.Settings;
-import me.strukteon.bulbybot.commands.general.Stats;
+import me.strukteon.bulbybot.commands.general.*;
 import me.strukteon.bulbybot.commands.money.*;
 import me.strukteon.bulbybot.listeners.ReactionAddListener;
 import me.strukteon.bulbybot.listeners.ReadyListener;
@@ -27,7 +24,8 @@ public class Importer {
                         new About(),
                         new Execute(),
                         new Settings(),
-                        new Stats())
+                        new Stats(),
+                        new Invite())
                 .addCommandSection("Money",
                         new Balance(),
                         new Daily(),
