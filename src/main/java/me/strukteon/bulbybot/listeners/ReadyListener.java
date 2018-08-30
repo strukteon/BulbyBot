@@ -22,6 +22,11 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class ReadyListener extends ListenerAdapter {
     @Override
     public void onReady(ReadyEvent event) {
@@ -55,5 +60,18 @@ public class ReadyListener extends ListenerAdapter {
         BulbyBot.premiumRenderThread.start();
 
         new CoolStatus(jda).start();
+
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Connection old = mySQL.getConnection();
+                mySQL.connect();
+                try {
+                    old.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 30 * 60 * 1000, 30 * 60 * 1000);
     }
 }
