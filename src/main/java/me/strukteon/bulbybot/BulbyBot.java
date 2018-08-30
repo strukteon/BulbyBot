@@ -62,8 +62,7 @@ public class BulbyBot {
                 .setStatus(OnlineStatus.DO_NOT_DISTURB);
 
         Importer.importListeners(builder);
-        BulbyBot.initCommandHandler();
-        
+
         try {
             shardManager = builder.build();
         } catch (LoginException e) {
@@ -72,13 +71,15 @@ public class BulbyBot {
     }
 
     public static void initCommandHandler(){
-        betterCommand = new BetterCommand(Settings.INSTANCE.prefix, true);
-        Importer.importCommands(betterCommand);
-        betterCommand
-                .useDefaultHelpMessage("help", Color.decode("#7BFF2E"), "?")
-                .useShardManager(shardManager)
-                .setCooldown(200)
-                .enable();
+        if (betterCommand == null) {
+            betterCommand = new BetterCommand(Settings.INSTANCE.prefix, true);
+            Importer.importCommands(betterCommand);
+            betterCommand
+                    .useDefaultHelpMessage("help", Color.decode("#7BFF2E"), "?")
+                    .useShardManager(shardManager)
+                    .setCooldown(200)
+                    .enable();
+        }
     }
 
     public static ShardManager getShardManager() {

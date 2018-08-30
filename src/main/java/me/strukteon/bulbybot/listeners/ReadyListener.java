@@ -49,6 +49,8 @@ public class ReadyListener extends ListenerAdapter {
         InventorySQL.init(mySQL);
         MarketSQL.init(mySQL);
 
+        BulbyBot.initCommandHandler();
+
         jda.getPresence().setPresence(OnlineStatus.ONLINE, true);
 
         BulbyBot.defaultRenderThread = new RenderThread();
