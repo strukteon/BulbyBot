@@ -62,7 +62,8 @@ public class BulbyBot {
                 .setStatus(OnlineStatus.DO_NOT_DISTURB);
 
         Importer.importListeners(builder);
-
+        BulbyBot.initCommandHandler();
+        
         try {
             shardManager = builder.build();
         } catch (LoginException e) {
