@@ -13,12 +13,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 
 public class Settings {
     public static Settings INSTANCE = new Settings();
 
     public String token = "";
     public String prefix = "b!";
+
+    public List<Integer> shardIds = List.of(0);
+    public int shardCount = 1;
 
     public String errorChannelId = "482637061279449098";
 
