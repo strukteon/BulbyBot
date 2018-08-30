@@ -92,7 +92,7 @@ public class ProfileImage implements Renderable {
 
         Font discordia = null;
         try {
-            discordia = Font.createFont(Font.TRUETYPE_FONT, new File("D:\\Downloads\\discordia.otf")).deriveFont(70f);
+            discordia = Font.createFont(Font.TRUETYPE_FONT, ProfileImage.class.getResourceAsStream("/res/discordia.otf")).deriveFont(70f);
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }
