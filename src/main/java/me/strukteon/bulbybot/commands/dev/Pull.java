@@ -20,7 +20,7 @@ public class Pull implements ExtendedCommand {
 
         event.getTextChannel().sendMessage("Pulling started!").queue();
 
-        ProcessBuilder builder = new ProcessBuilder("/home/bulbybot.sh");
+        ProcessBuilder builder = new ProcessBuilder("sudo /home/bulbybot.sh");
         builder.start();
 
     }
