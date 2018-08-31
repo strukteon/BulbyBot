@@ -10,6 +10,7 @@ import me.strukteon.bulbybot.core.sql.inventory.InventoryItem;
 import me.strukteon.bulbybot.core.sql.inventory.InventorySQL;
 import me.strukteon.bulbybot.utils.items.Item;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.User;
 
 import java.awt.*;
@@ -30,6 +31,10 @@ public class ChatTools {
         EmbedBuilder eb = new EmbedBuilder()
                 .setColor(Static.COLOR_GREEN);
         return eb;
+    }
+
+    public static EmbedBuilder INFO(Member member){
+        return INFO(member.getUser());
     }
 
     public static EmbedBuilder INFO(User user){

@@ -11,23 +11,20 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.entities.TextChannel;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GuildSQL {
     public static MySQL mySQL;
     private static String table = "guilds";
-    private static String[] columns = {"id", "autorole", "prefix", "savedqueue", "welcomechannel"};
+    private static String[] columns = {"id", "autoroles", "prefix", "welcomechannel"};
 
     private String guildid;
 
     public static void init(MySQL mySQL){
         GuildSQL.mySQL = mySQL;
-
-        if (!mySQL.TABLE_EXISTS(table))
-            mySQL.CREATE_TABLE(table, columns);
-
-        mySQL.MATCH_COLUMNS(table, columns);
     }
 
 
@@ -48,25 +45,28 @@ public class GuildSQL {
 
 
     public boolean exists(){
-        return mySQL.SELECT("*", table, "id='"+guildid+"'").size() != 0;
+        return mySQL.SELECT("*", table, "id="+guildid).size() != 0;
     }
 
     public void create(){
-        mySQL.INSERT(table, "`id`, `prefix`, `autorole`, `savedqueue`, `welcomechannel`", String.format("'%s', '%s', '', '', ''", guildid, Settings.INSTANCE.prefix));
+        mySQL.INSERT(table, "`id`, `prefix`, `autoroles`, `welcomechannel`", String.format("%s, '%s', '', ''", guildid, Settings.INSTANCE.prefix));
     }
 
 
     public String getPrefix(){
-        return mySQL.SELECT("*", table, "id='"+guildid+"'").get("prefix");
+        return mySQL.SELECT("*", table, "id="+guildid).get("prefix");
     }
 
-    public Role getAutoRole(){
-        String autorole = mySQL.SELECT("*", table, "id='"+guildid+"'").get("autorole");
-        try {
-            return BulbyBot.getShardManager().getRoleById(autorole);
-        } catch (IllegalArgumentException e){
-            return null;
-        }
+    public List<Role> getAutoRoles(){
+        List<Role> roles = new ArrayList<>();
+        String rawString = mySQL.SELECT("*", table, "id="+guildid).get("autoroles");
+        if (rawString.trim().equals(""))
+            return roles;
+        String[] rawRoles = rawString.split(" ");
+        Arrays.stream(rawRoles).forEach(s -> {
+            roles.add(BulbyBot.getShardManager().getRoleById(s));
+        });
+        return roles;
     }
 
     public TextChannel getWelcomeChannel(){
@@ -78,27 +78,20 @@ public class GuildSQL {
         }
     }
 
-    public List<String> getSavedQueue(){
-        String savedqueue = mySQL.SELECT("*", table, "id='"+guildid+"'").get("savedqueue");
-        return Arrays.asList(savedqueue.split(" "));
-    }
-
 
     public void setPrefix(String prefix){
         mySQL.UPDATE(table, "prefix='"+prefix+"'", "id='"+guildid+"'");
     }
 
-    public void setAutoRole(String roleId){
-        mySQL.UPDATE(table, "autorole='"+roleId+"'", "id='"+guildid+"'");
+    public void setAutoRoles(String... roleIds){
+        mySQL.UPDATE(table, "autoroles='"+String.join(" ", roleIds)+"'", "id="+guildid);
+    }
+
+    public void setAutoRoles(List<Role> roles){
+        setAutoRoles(roles.stream().map(Role::getId).toArray(String[]::new));
     }
 
     public void setWelcomeChannel(String textChannelId){
         mySQL.UPDATE(table, "welcomechannel='"+textChannelId+"'", "id='"+guildid+"'");
-    }
-
-    public void setSavedQueue(List<String> queue){
-        StringBuilder b = new StringBuilder();
-        queue.forEach(s -> b.append(s + " "));
-        mySQL.UPDATE(table, "savedqueue='"+b.toString()+"'", "id='"+guildid+"'");
     }
 }

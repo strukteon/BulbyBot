@@ -11,6 +11,7 @@ import me.strukteon.bulbybot.commands.dev.AddMoney;
 import me.strukteon.bulbybot.commands.dev.Pull;
 import me.strukteon.bulbybot.commands.dev.ThrowException;
 import me.strukteon.bulbybot.commands.general.*;
+import me.strukteon.bulbybot.commands.moderation.Autorole;
 import me.strukteon.bulbybot.commands.money.*;
 import me.strukteon.bulbybot.listeners.ReactionAddListener;
 import me.strukteon.bulbybot.listeners.ReadyListener;
@@ -21,6 +22,8 @@ public class Importer {
 
     public static void importCommands(BetterCommand betterCommand){
         betterCommand
+                .addCommandSection("Moderation",
+                        new Autorole())
                 .addCommandSection("General",
                         new About(),
                         new Execute(),
@@ -49,7 +52,8 @@ public class Importer {
                 .addEventListeners(
                         new ReadyListener(),
                         new ReactionAddListener(),
-                        new XPListener()
+                        new XPListener(),
+                        new Autorole()
                 );
 
     }

@@ -156,6 +156,7 @@ public class SyntaxValidator {
     }
 
     public Role validateRole(String toValidate, Guild guild) throws SyntaxValidateException {
+        toValidate = toValidate.toLowerCase();
         Role role = null;
         if (CommandTools.isRoleMention(toValidate) || CommandTools.isId(toValidate))
             role = guild.getRoleById(CommandTools.roleToId(toValidate));
@@ -166,7 +167,7 @@ public class SyntaxValidator {
                 List<Role> possibles = guild.getRolesByName(toValidate, true);
                 if (possibles.size() == 0) {
                     for (Role r : guild.getRoles())
-                        if (r.getName().contains(toValidate))
+                        if (r.getName().toLowerCase().contains(toValidate))
                             return r;
                     throw new SyntaxValidateException(SyntaxValidateException.Cause.NOT_FOUND);
                 }

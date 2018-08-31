@@ -7,6 +7,7 @@ package me.strukteon.bulbybot.listeners;
 
 import me.strukteon.bulbybot.BulbyBot;
 import me.strukteon.bulbybot.core.CLI;
+import me.strukteon.bulbybot.core.sql.GuildSQL;
 import me.strukteon.bulbybot.core.sql.MySQL;
 import me.strukteon.bulbybot.core.sql.PatreonSQL;
 import me.strukteon.bulbybot.core.sql.UserSQL;
@@ -48,6 +49,7 @@ public class ReadyListener extends ListenerAdapter {
         PatreonSQL.init(mySQL);
         InventorySQL.init(mySQL);
         MarketSQL.init(mySQL);
+        GuildSQL.init(mySQL);
 
         BulbyBot.initCommandHandler();
 
