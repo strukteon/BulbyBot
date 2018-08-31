@@ -30,7 +30,8 @@ public class Importer {
                         new Execute(),
                         new Settings(),
                         new Stats(),
-                        new Invite())
+                        new Invite(),
+                        new Repository())
                 .addCommandSection("Money",
                         new Balance(),
                         new Daily(),
