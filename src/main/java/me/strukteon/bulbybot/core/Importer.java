@@ -39,8 +39,7 @@ public class Importer {
                 .addCommandSection("Devs only (don't even try)",
                         new AddItem(),
                         new AddMoney(),
-                        new ThrowException(),
-                        new Pull())
+                        new ThrowException())
         ;
     }
 
