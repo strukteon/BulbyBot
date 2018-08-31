@@ -13,6 +13,7 @@ import me.strukteon.bulbybot.commands.dev.ThrowException;
 import me.strukteon.bulbybot.commands.general.*;
 import me.strukteon.bulbybot.commands.moderation.Autorole;
 import me.strukteon.bulbybot.commands.money.*;
+import me.strukteon.bulbybot.listeners.GuildUpdateListener;
 import me.strukteon.bulbybot.listeners.ReactionAddListener;
 import me.strukteon.bulbybot.listeners.ReadyListener;
 import me.strukteon.bulbybot.listeners.XPListener;
@@ -50,6 +51,7 @@ public class Importer {
     public static void importListeners(DefaultShardManagerBuilder builder){
         builder
                 .addEventListeners(
+                        new GuildUpdateListener(),
                         new ReadyListener(),
                         new ReactionAddListener(),
                         new XPListener(),
