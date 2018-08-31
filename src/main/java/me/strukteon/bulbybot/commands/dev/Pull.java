@@ -19,14 +19,15 @@ public class Pull implements ExtendedCommand {
     public void onExecute(CommandEvent event, Syntax syntax, User author, MessageChannel channel) throws Exception {
 
         event.getTextChannel().sendMessage("Pulling started!").queue();
-        Runtime.getRuntime().exec("bash /home/bulby.sh");
+        String[] cmds = {"/bin/sh", "bash /home/bulby.sh"};
+        Process p = Runtime.getRuntime().exec(cmds);
 
     }
 
     @Override
     public CommandInfo getCommandInfo() {
         return new CommandInfo("pull")
-                .setHelp("Gets the newest version of me from github!");
+                .setHelp("Pulls the newest version from github!");
     }
 
 }
