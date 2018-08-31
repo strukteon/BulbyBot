@@ -19,7 +19,7 @@ public class Pull implements ExtendedCommand {
     public void onExecute(CommandEvent event, Syntax syntax, User author, MessageChannel channel) throws Exception {
 
         event.getTextChannel().sendMessage("Pulling started!").queue();
-        String[] cmds = {"/bin/sh", "bash /home/bulby.sh"};
+        String[] cmds = {"/bin/sh", "bash /home/bulbybot.sh"};
         Process p = Runtime.getRuntime().exec(cmds);
 
     }
