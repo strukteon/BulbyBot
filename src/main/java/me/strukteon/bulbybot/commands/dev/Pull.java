@@ -6,12 +6,12 @@
 
 package me.strukteon.bulbybot.commands.dev;
 
-import me.strukteon.bettercommand.CommandEvent;
-import me.strukteon.bettercommand.command.CommandInfo;
-import me.strukteon.bettercommand.command.ExtendedCommand;
-import me.strukteon.bettercommand.syntax.Syntax;
-import net.dv8tion.jda.core.entities.MessageChannel;
-import net.dv8tion.jda.core.entities.User;
+        import me.strukteon.bettercommand.CommandEvent;
+        import me.strukteon.bettercommand.command.CommandInfo;
+        import me.strukteon.bettercommand.command.ExtendedCommand;
+        import me.strukteon.bettercommand.syntax.Syntax;
+        import net.dv8tion.jda.core.entities.MessageChannel;
+        import net.dv8tion.jda.core.entities.User;
 
 public class Pull implements ExtendedCommand {
 
@@ -19,7 +19,7 @@ public class Pull implements ExtendedCommand {
     public void onExecute(CommandEvent event, Syntax syntax, User author, MessageChannel channel) throws Exception {
 
         event.getTextChannel().sendMessage("Pulling started!").queue();
-        Runtime.getRuntime().exec("cmd bash /home/bulby.sh");
+        Runtime.getRuntime().exec("bash /home/bulby.sh");
 
     }
 
