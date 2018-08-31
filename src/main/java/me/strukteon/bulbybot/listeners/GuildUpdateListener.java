@@ -6,6 +6,7 @@ package me.strukteon.bulbybot.listeners;
 */
 
 import com.google.gson.JsonObject;
+import me.strukteon.bulbybot.utils.Settings;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.events.guild.GuildBanEvent;
 import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
@@ -17,6 +18,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import org.json.JSONObject;
 
+import javax.naming.directory.SearchResult;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -43,6 +45,7 @@ public class GuildUpdateListener extends ListenerAdapter {
         try {
             URL dblUrl = new URL(String.format("https://discordbots.org/api/bots/%s/stats", jda.getSelfUser().getId()));
             client.newCall(new Request.Builder().url(dblUrl)
+                    .addHeader("Authorization", Settings.INSTANCE.dblToken)
                     .post(RequestBody.create(MediaType.parse("application/json"),
                             new JSONObject()
                             .put("server_count", jda.getGuilds().size())

@@ -33,6 +33,8 @@ public class Settings {
     public String jDoodleClientId = "";
     public String jDoodleClientSecret = "";
 
+    public String dblToken = "";
+
     public static void loadFromFile(File file) throws FileNotFoundException {
         Gson gson = new Gson();
         INSTANCE = gson.fromJson(new FileReader(file), Settings.class);
