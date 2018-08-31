@@ -26,7 +26,7 @@ public class Pull implements ExtendedCommand {
     @Override
     public CommandInfo getCommandInfo() {
         return new CommandInfo("pull")
-                .setHelp("Pulls the newest version from github!");
+                .setHelp("Gets the newest version of me from github!");
     }
 
 }
