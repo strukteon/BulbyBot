@@ -78,7 +78,7 @@ public class Ban implements ExtendedCommand {
                 .setHelp("Bans all mentioned users!")
                 .setSyntaxBuilder(
                         new SyntaxBuilder()
-                                .addElement("users", SyntaxElementType.USER, true)
+                                .addElement("users", SyntaxElementType.MEMBER, true)
                 );
     }
 

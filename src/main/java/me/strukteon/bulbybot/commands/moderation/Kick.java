@@ -78,7 +78,7 @@ public class Kick implements ExtendedCommand {
             .setHelp("Kicks all mentioned users!")
             .setSyntaxBuilder(
                 new SyntaxBuilder()
-                    .addElement("users", SyntaxElementType.USER, true)
+                    .addElement("users", SyntaxElementType.MEMBER, true)
             );
     }
 
