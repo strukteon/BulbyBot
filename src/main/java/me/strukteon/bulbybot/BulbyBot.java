@@ -6,8 +6,10 @@ package me.strukteon.bulbybot;
 */
 
 import me.strukteon.bettercommand.BetterCommand;
+import me.strukteon.bettercommand.command.Loader;
 import me.strukteon.bulbybot.core.CLI;
 import me.strukteon.bulbybot.core.Importer;
+import me.strukteon.bulbybot.core.sql.GuildSQL;
 import me.strukteon.bulbybot.core.threading.RenderThread;
 import me.strukteon.bulbybot.utils.Settings;
 import net.dv8tion.jda.bot.sharding.DefaultShardManagerBuilder;
@@ -75,6 +77,10 @@ public class BulbyBot {
             betterCommand = new BetterCommand(Settings.INSTANCE.prefix, true);
             Importer.importCommands(betterCommand);
             betterCommand
+                    .setPrefixLoader(guildId -> {
+                        GuildSQL guildSQL = GuildSQL.fromGuildId(guildId + "");
+                        return guildSQL.getPrefix();
+                    })
                     .useDefaultHelpMessage("help", Color.decode("#7BFF2E"), "?")
                     .useShardManager(shardManager)
                     .setCooldown(200)

@@ -14,6 +14,7 @@ import me.strukteon.bulbybot.commands.general.*;
 import me.strukteon.bulbybot.commands.moderation.Autorole;
 import me.strukteon.bulbybot.commands.moderation.Ban;
 import me.strukteon.bulbybot.commands.moderation.Kick;
+import me.strukteon.bulbybot.commands.moderation.Prefix;
 import me.strukteon.bulbybot.commands.money.*;
 import me.strukteon.bulbybot.listeners.*;
 import net.dv8tion.jda.bot.sharding.DefaultShardManagerBuilder;
@@ -24,8 +25,10 @@ public class Importer {
         betterCommand
                 .addCommandSection("Moderation",
                         new Autorole(),
+                        new Prefix(),
                         new Ban(),
                         new Kick())
+
                 .addCommandSection("General",
                         new About(),
                         new Execute(),
@@ -33,6 +36,7 @@ public class Importer {
                         new Stats(),
                         new Invite(),
                         new Repository())
+
                 .addCommandSection("Money",
                         new Balance(),
                         new Daily(),
@@ -42,6 +46,7 @@ public class Importer {
                         new Register(),
                         new Market(),
                         new Shop())
+
                 .addCommandSection("Devs only (don't even try)",
                         new AddItem(),
                         new AddMoney(),
