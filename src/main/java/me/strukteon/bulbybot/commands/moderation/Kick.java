@@ -59,7 +59,7 @@ public class Kick implements ExtendedCommand {
         if (notKicked.length() > 0)
             eb.setDescription("**Not kicked members (you/I have no permissions)**\n"+notKicked);
         if (kicked.length() > 0)
-            eb.appendDescription((notBanned.length() > 0 ? "\n\n" : "") + "**Successfully kicked members**\n"+kicked);
+            eb.appendDescription((notKicked.length() > 0 ? "\n\n" : "") + "**Successfully kicked members**\n"+kicked);
 
         channel.sendMessage(eb.build()).queue();
 
