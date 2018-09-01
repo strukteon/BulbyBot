@@ -88,13 +88,15 @@ public class Autorole extends ListenerAdapter implements ExtendedGuildCommand {
     public PermissionManager getPermissionManager() {
         return new PermissionManager()
                 .addRequiredUserPerms(Permission.MANAGE_ROLES)
-                .addRequiredBotPerms(Permission.MANAGE_ROLES);
+                .addRequiredUserPerms(Permission.MANAGE_ROLES);
     }
 
     @Override
     public CommandInfo getCommandInfo() {
         return new CommandInfo("autorole")
-                .setSyntaxBuilder(new SyntaxBuilder(
+                .setHelp("Automatically give users roles when they join the guild!")
+                .setSyntaxBuilder(
+                        new SyntaxBuilder(
                         new SyntaxBuilder()
                                 .addSubcommand("mode", "add")
                                 .addElement("roles", SyntaxElementType.ROLE, true),
