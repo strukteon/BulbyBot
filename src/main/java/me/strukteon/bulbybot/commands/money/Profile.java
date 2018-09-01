@@ -70,7 +70,6 @@ public class Profile implements ExtendedCommand {
                 }
             } else
                 ui.onlineState = Color.decode("#00bdff");
-            System.out.println(userSQL.getMoney());
             ui.money = userSQL.getMoney();
             ui.bio = userSQL.getBio();
             ui.xp = userSQL.getXp();

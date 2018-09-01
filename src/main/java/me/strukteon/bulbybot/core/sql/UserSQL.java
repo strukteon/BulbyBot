@@ -109,7 +109,6 @@ public class UserSQL {
     public long getXp(){
         try {
             String s = mySQL.SELECT("*", table, "id='" + userid + "'").get("xp");
-            System.out.println("xp " + s);
             return Long.parseLong(s);
         } catch (NumberFormatException e){
             return 0;

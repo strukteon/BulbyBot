@@ -77,7 +77,6 @@ public class SyntaxValidator {
     }
 
     public User validateUser(String toValidate, JDA jda) throws SyntaxValidateException {
-        System.out.println(toValidate);
         if (!(CommandTools.isMention(toValidate) || CommandTools.isId(toValidate)))
             throw new SyntaxValidateException(SyntaxValidateException.Cause.INVALID);
         User user = jda.getUserById(CommandTools.mentionToId(toValidate));

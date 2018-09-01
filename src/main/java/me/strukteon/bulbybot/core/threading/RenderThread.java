@@ -29,14 +29,10 @@ public class RenderThread extends Thread {
                 RenderItem item = renderQueue.take();
                 item.getOnStartInterface().started();
                 long renderStart = System.currentTimeMillis();
-                System.out.println("started RENDERING");
                 item.getRenderable().render();
-                System.out.println("DONE RENDERING");
                 File result = item.getRenderable().getFile();
-                System.out.println("SAVED FILE");
                 long curTime = System.currentTimeMillis();
                 item.getOnFinishInterface().finished(result, curTime - renderStart, curTime - item.getQueueStart());
-                System.out.println("CALLED ONFINISH");
             } catch (InterruptedException ignored) {
                 Thread.currentThread().interrupt();
             }

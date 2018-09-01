@@ -91,7 +91,6 @@ public class MarketSQL {
             items.append("itemid=" + i);
         });
         try {
-            System.out.println(String.format("select * from %s %s order by price %s", table, items.toString(), sortType.asMySql));
             ResultSet res = mySQL.getConnection().prepareStatement(String.format("select * from %s where %s order by price %s", table, items.toString(), sortType.asMySql)).executeQuery();
             while (res.next())
                 entries.add(new MarketEntry(res.getInt("marketid"), res.getString("ownerid"), res.getInt("inventoryid"),

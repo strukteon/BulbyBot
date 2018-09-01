@@ -31,7 +31,6 @@ public class CommandListener extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        System.out.println(event.isFromType(ChannelType.TEXT));
         CommandEvent commandEvent = new CommandEvent(event, betterCommand, event.isFromType(ChannelType.TEXT));
         String prefix;
         if (event.getChannelType().isGuild()) {

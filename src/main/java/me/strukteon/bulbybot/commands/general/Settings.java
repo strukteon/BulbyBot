@@ -71,7 +71,6 @@ public class Settings implements ExtendedCommand {
                             if (item.getItemId() == inventorySQL.getUsedItem(Item.Type.EMBED_COLOR).getItemId())
                                 response.setDescription("You already have this item equipped!");
                             else {
-                                System.out.println("Inv ID: " + item.getInventoryId());
                                 inventorySQL.setUsedItem(item.getInventoryId(), item.getItem().getItemType());
                                 response.setDescription("You now have ``" + item.getItem().getName() + "`` equipped as your embed color!");
                             }

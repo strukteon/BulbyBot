@@ -76,7 +76,6 @@ public class Syntax extends HashMap<String, Object> {
     }
 
     public String getAsJoinedListString(String name){
-        System.out.println(getAsListString(name));
         return String.join(" ", getAsListString(name));
     }
 

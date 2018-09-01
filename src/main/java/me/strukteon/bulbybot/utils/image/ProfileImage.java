@@ -66,7 +66,6 @@ public class ProfileImage implements Renderable {
         try {
             userInfo.badges.forEach(file -> {
                 try {
-                    System.out.println(file);
                     badges.add(ImageTools.scale(ImageIO.read(file), 50, 50));
                 } catch (IOException e) {
                     e.printStackTrace();
