@@ -64,33 +64,14 @@ public class Ban implements ExtendedCommand {
 
         });
 
-        if (banned.toString().equals("")) {
-
-            EmbedBuilder eb = ChatTools.INFO(author)
-                    .setTitle("Ban-List")
-                    .setDescription("**Not banned members (in cause of their higher then me/you)**\n"+notBanned);
-
-            channel.sendMessage(eb.build()).queue();
-
-            return;
-
-        }
-
-        if (notBanned.toString().equals("")) {
-
-            EmbedBuilder eb = ChatTools.INFO(author)
-                    .setTitle("Ban-List")
-                    .setDescription("**Successfully banned members**\n"+banned);
-
-            channel.sendMessage(eb.build()).queue();
-
-            return;
-
-        }
+        
 
         EmbedBuilder eb = ChatTools.INFO(author)
-                .setTitle("Ban-List")
-                .setDescription("**Successfully banned members**\n"+banned+"\n\n**Not banned members (in cause of their higher then me/you)**\n"+notBanned);
+            .setTitle("Ban-List");
+        if (notBanned.length() > 0)
+            eb.setDescription("**Not banned members (you/I have no permissions)**\n"+notBanned);
+        if (banned.length() > 0)
+            eb.appendDescription((notBanned.length() > 0 ? "\n\n" : "") + "**Successfully banned members**\n"+banned);
 
         channel.sendMessage(eb.build()).queue();
 
