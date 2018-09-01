@@ -12,6 +12,8 @@ import me.strukteon.bulbybot.commands.dev.Pull;
 import me.strukteon.bulbybot.commands.dev.ThrowException;
 import me.strukteon.bulbybot.commands.general.*;
 import me.strukteon.bulbybot.commands.moderation.Autorole;
+import me.strukteon.bulbybot.commands.moderation.Ban;
+import me.strukteon.bulbybot.commands.moderation.Kick;
 import me.strukteon.bulbybot.commands.money.*;
 import me.strukteon.bulbybot.listeners.GuildUpdateListener;
 import me.strukteon.bulbybot.listeners.ReactionAddListener;
@@ -24,7 +26,9 @@ public class Importer {
     public static void importCommands(BetterCommand betterCommand){
         betterCommand
                 .addCommandSection("Moderation",
-                        new Autorole())
+                        new Autorole(),
+                        new Ban(),
+                        new Kick())
                 .addCommandSection("General",
                         new About(),
                         new Execute(),
