@@ -34,7 +34,7 @@ public class Register implements ExtendedCommand {
             inventorySQL.addItem(Item.EMBED_COLOR_GREEN, InventoryItem.Availability.IN_USE);
 
             EmbedBuilder eb = ChatTools.INFO(author)
-                    .setDescription("You know have an account! You got 50 bonus credits to get started!");
+                    .setDescription("You now have an account! You got 50 bonus credits to get started!");
             channel.sendMessage(eb.build()).queue();
         } else {
             EmbedBuilder eb = ChatTools.INFO(author)
