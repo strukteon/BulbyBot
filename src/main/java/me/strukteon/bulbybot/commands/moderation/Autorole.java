@@ -88,7 +88,7 @@ public class Autorole extends ListenerAdapter implements ExtendedGuildCommand {
     public PermissionManager getPermissionManager() {
         return new PermissionManager()
                 .addRequiredUserPerms(Permission.MANAGE_ROLES)
-                .addRequiredUserPerms(Permission.MANAGE_ROLES);
+                .addRequiredBotPerms(Permission.MANAGE_ROLES);
     }
 
     @Override
