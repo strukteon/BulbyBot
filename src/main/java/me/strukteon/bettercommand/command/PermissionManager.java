@@ -43,7 +43,7 @@ public class PermissionManager {
     }
 
     public PermissionManager addRequiredUserPerms(Permission... requiredUserPerms) {
-        return addRequiredBotPerms(Arrays.asList(requiredUserPerms));
+        return addRequiredUserPerms(Arrays.asList(requiredUserPerms));
     }
 
     public PermissionManager addRequiredUserPerms(Collection<Permission> requiredUserPerms) {
