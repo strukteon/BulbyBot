@@ -56,9 +56,9 @@ public class Kick implements ExtendedCommand {
 
         EmbedBuilder eb = ChatTools.INFO(author)
             .setTitle("Kick-List");
-        if (notBanned.length() > 0)
+        if (notKicked.length() > 0)
             eb.setDescription("**Not kicked members (you/I have no permissions)**\n"+notKicked);
-        if (banned.length() > 0)
+        if (kicked.length() > 0)
             eb.appendDescription((notBanned.length() > 0 ? "\n\n" : "") + "**Successfully kicked members**\n"+kicked);
 
         channel.sendMessage(eb.build()).queue();
