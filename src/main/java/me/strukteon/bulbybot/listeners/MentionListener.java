@@ -7,6 +7,7 @@
 package me.strukteon.bulbybot.listeners;
 
 import me.strukteon.bulbybot.utils.ChatTools;
+import me.strukteon.bulbybot.utils.Settings;
 import me.strukteon.bulbybot.utils.Static;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -21,7 +22,7 @@ public class MentionListener extends ListenerAdapter {
 
         EmbedBuilder eb = ChatTools.INFO(event.getAuthor())
                 .setAuthor("Introducing... me!", Static.PLACEHOLDER_URL, event.getJDA().getSelfUser().getEffectiveAvatarUrl())
-                .setDescription("My Website: **Coming soon!**\nVote for me on: **[discordbots.org](https://discordbots.org/bot/481221667813589027/vote)**\nOur GitHub repo: [github.com](https://github.com/strukteon/BulbyBot)\n\nMy Developers are: **black_wolf**#6549 & **strukteon**#2018\nPublished on: **Not yet :wink: (Closed Beta)**\nCreated by: **strukteon** on 22.8.2018");
+                .setDescription("My Prefix: **"+ Settings.INSTANCE.prefix+"**\nMy Website: **Coming soon!**\nVote for me on: **[discordbots.org](https://discordbots.org/bot/481221667813589027/vote)**\nOur GitHub repo: [github.com](https://github.com/strukteon/BulbyBot)\n\nMy Developers are: **black_wolf**#6549 & **strukteon**#2018\nPublished on: **Not yet :wink: (Closed Beta)**\nCreated by: **strukteon** on 22.8.2018");
         event.getChannel().sendMessage(eb.build()).queue();
 
     }
