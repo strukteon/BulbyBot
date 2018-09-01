@@ -33,19 +33,7 @@ public class Ban implements ExtendedCommand {
         if (!(PermissionsCheck.hasPermission(event, event.getMember(), Permission.BAN_MEMBERS)))
             return;
 
-        if (!(event.getMessage().getMentionedMembers().size() > 0)) {
-
-            event.getTextChannel().sendMessage(
-                    new EmbedBuilder()
-                        .setColor(Static.COLOR_RED)
-                        .setDescription("You must mention at least one member to ban him/her!")
-                        .build()
-            ).queue();
-
-            return;
-        }
-
-        List<Member> mentionedMembers = event.getMessage().getMentionedMembers();
+        List<Member> mentionedMembers = syntax.getAsListMember("users");
         Guild guild = event.getGuild();
         int selPosition = guild.getSelfMember().getRoles().get(0).getPosition();
         int authorPosition = event.getMember().getRoles().get(0).getPosition();
@@ -90,7 +78,7 @@ public class Ban implements ExtendedCommand {
                 .setHelp("Bans all mentioned users!")
                 .setSyntaxBuilder(
                         new SyntaxBuilder()
-                                .addElement("user", SyntaxElementType.USER, true)
+                                .addElement("users", SyntaxElementType.USER, true)
                 );
     }
 

@@ -33,19 +33,7 @@ public class Kick implements ExtendedCommand {
         if (!(PermissionsCheck.hasPermission(event, event.getMember(), Permission.KICK_MEMBERS)))
             return;
 
-        if (!(event.getMessage().getMentionedMembers().size() > 0)) {
-
-            event.getTextChannel().sendMessage(
-                    new EmbedBuilder()
-                            .setColor(Static.COLOR_RED)
-                            .setDescription("You must mention at least one member to kick him/her!")
-                            .build()
-            ).queue();
-
-            return;
-        }
-
-        List<Member> mentionedMembers = event.getMessage().getMentionedMembers();
+        List<Member> mentionedMembers = syntax.getAsListMember("users");
         Guild guild = event.getGuild();
         int selPosition = guild.getSelfMember().getRoles().get(0).getPosition();
         int authorPosition = event.getMember().getRoles().get(0).getPosition();
@@ -64,33 +52,14 @@ public class Kick implements ExtendedCommand {
 
         });
 
-        if (kicked.toString().equals("")) {
-
-            EmbedBuilder eb = ChatTools.INFO(author)
-                    .setTitle("Kick-List")
-                    .setDescription("**Not kicked members (in cause of their higher then me/you)**\n"+notKicked);
-
-            channel.sendMessage(eb.build()).queue();
-
-            return;
-
-        }
-
-        if (notKicked.toString().equals("")) {
-
-            EmbedBuilder eb = ChatTools.INFO(author)
-                    .setTitle("Kick-List")
-                    .setDescription("**Successfully kicked members**\n"+kicked);
-
-            channel.sendMessage(eb.build()).queue();
-
-            return;
-
-        }
+        
 
         EmbedBuilder eb = ChatTools.INFO(author)
-                .setTitle("Kick-List")
-                .setDescription("**Successfully kicked members**\n"+kicked+"\n\n**Not kicked members (in cause of their higher then me/you)**\n"+notKicked);
+            .setTitle("Kick-List");
+        if (notBanned.length() > 0)
+            eb.setDescription("**Not kicked members (you/I have no permissions)**\n"+notBanned);
+        if (banned.length() > 0)
+            eb.appendDescription((notBanned.length() > 0 ? "\n\n" : "") + "**Successfully kicked members**\n"+banned);
 
         channel.sendMessage(eb.build()).queue();
 
@@ -109,7 +78,7 @@ public class Kick implements ExtendedCommand {
             .setHelp("Kicks all mentioned users!")
             .setSyntaxBuilder(
                 new SyntaxBuilder()
-                    .addElement("user", SyntaxElementType.USER, true)
+                    .addElement("users", SyntaxElementType.USER, true)
             );
     }
 
