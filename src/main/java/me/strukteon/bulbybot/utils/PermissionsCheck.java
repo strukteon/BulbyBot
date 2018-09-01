@@ -18,7 +18,6 @@ public class PermissionsCheck {
         if (member.hasPermission(permission))
             return true;
 
-
         event.getTextChannel().sendMessage(
                 new EmbedBuilder()
                         .setColor(Static.COLOR_RED)
