@@ -15,10 +15,7 @@ import me.strukteon.bulbybot.commands.moderation.Autorole;
 import me.strukteon.bulbybot.commands.moderation.Ban;
 import me.strukteon.bulbybot.commands.moderation.Kick;
 import me.strukteon.bulbybot.commands.money.*;
-import me.strukteon.bulbybot.listeners.GuildUpdateListener;
-import me.strukteon.bulbybot.listeners.ReactionAddListener;
-import me.strukteon.bulbybot.listeners.ReadyListener;
-import me.strukteon.bulbybot.listeners.XPListener;
+import me.strukteon.bulbybot.listeners.*;
 import net.dv8tion.jda.bot.sharding.DefaultShardManagerBuilder;
 
 public class Importer {
@@ -60,7 +57,8 @@ public class Importer {
                         new ReadyListener(),
                         new ReactionAddListener(),
                         new XPListener(),
-                        new Autorole()
+                        new Autorole(),
+                        new MentionListener()
                 );
 
     }
