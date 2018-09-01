@@ -43,11 +43,11 @@ public class Kick implements ExtendedCommand {
         mentionedMembers.forEach(member -> {
 
             if (member.getRoles().get(0).getPosition() >= selPosition || member.getRoles().get(0).getPosition() >= authorPosition || member.isOwner()) {
-                notKicked.append(" " + member.getEffectiveName());
+                notKicked.append((notKicked.length() > 0 ? ", " : "") + member.getAsMention());
             }
             else {
                 guild.getController().kick(member).reason("Command executed by " + author.getName()).queue();
-                kicked.append(" " + member.getEffectiveName());
+                kicked.append((kicked.length() > 0 ? ", " : "") + member.getAsMention());
             }
 
         });

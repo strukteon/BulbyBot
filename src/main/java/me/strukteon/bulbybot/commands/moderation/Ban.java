@@ -43,11 +43,11 @@ public class Ban implements ExtendedCommand {
         mentionedMembers.forEach(member -> {
 
             if (member.getRoles().get(0).getPosition() >= selPosition || member.getRoles().get(0).getPosition() >= authorPosition || member.isOwner()) {
-                notBanned.append(" " + member.getEffectiveName());
+                notBanned.append((notBanned.length() > 0 ? ", " : "") + member.getAsMention());
             }
             else {
                 guild.getController().ban(member, 0).reason("Command executed by " + author.getName()).queue();
-                banned.append(" " + member.getEffectiveName());
+                banned.append((banned.length() > 0 ? ", " : "") + member.getAsMention());
             }
 
         });
