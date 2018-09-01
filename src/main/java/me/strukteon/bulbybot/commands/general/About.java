@@ -20,7 +20,7 @@ public class About implements ExtendedCommand {
     public void onExecute(CommandEvent event, Syntax syntax, User author, MessageChannel channel) throws Exception {
         EmbedBuilder eb = ChatTools.INFO(author)
                 .setAuthor("Introducing... me!", Static.PLACEHOLDER_URL, event.getJDA().getSelfUser().getEffectiveAvatarUrl())
-                .setDescription("My Website: **Coming soon!**\nVote for me on: **Nothing yet**\nOur GitHub repo: [github.com](https://github.com/strukteon/BulbyBot)\n\nMy Developers are: **black_wolf**#6549 & **strukteon**#2018\nPublished on: **Not yet :wink: (Closed Beta)**\nCreated by: **strukteon** on 22.8.2018");
+                .setDescription("My Website: **Coming soon!**\nVote for me on: **[discordbots.org](https://discordbots.org/bot/481221667813589027/vote)**\nOur GitHub repo: [github.com](https://github.com/strukteon/BulbyBot)\n\nMy Developers are: **black_wolf**#6549 & **strukteon**#2018\nPublished on: **Not yet :wink: (Closed Beta)**\nCreated by: **strukteon** on 22.8.2018");
         channel.sendMessage(eb.build()).queue();
     }
 
