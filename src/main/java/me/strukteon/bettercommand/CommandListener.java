@@ -1,19 +1,3 @@
-package me.strukteon.bettercommand;
-/*
-    Created by nils on 31.07.2018 at 22:34.
-    
-    (c) nils 2018
-*/
-
-import me.strukteon.bettercommand.command.*;
-import me.strukteon.bettercommand.syntax.Syntax;
-import me.strukteon.bettercommand.syntax.SyntaxBuilder;
-import me.strukteon.bettercommand.syntax.SyntaxHandler;
-import me.strukteon.bettercommand.syntax.SyntaxValidateException;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.ChannelType;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import java.util.Arrays;
@@ -38,10 +22,10 @@ public class CommandListener extends ListenerAdapter {
         } else {
             prefix = betterCommand.getDefaultPrefix();
         }
-        boolean startsWithPrefix = event.getMessage().getContentRaw().startsWith(prefix);
+        boolean startsWithPrefix = event.getMessage().getContentRaw().startsWith("prefix);
         if (startsWithPrefix || event.getChannelType().equals(ChannelType.PRIVATE)) {
             commandEvent.setUsedPrefix(startsWithPrefix ? prefix : "");
-            if (!betterCommand.getBlacklistedLoader().isChannelBlacklisted(event.getChannel().getIdLong()) || !betterCommand.getBlacklistedLoader().isUserBlacklisted(event.getAuthor().getIdLong())) {
+            if (!betterCommand.getBlacklistedLoader().isChannelBlacklisted(event.getChannel().getIdLong()) || !betterCommand.getBlacklistedLoader().isUserBlacklisted(event.getAuthor().getIdLong()) || !event.getAuthor().isBot()) {
                 if (betterCommand.getCooldown() != 0)
                     if (cooldowns.containsKey(event.getAuthor().getId()) && cooldowns.get(event.getAuthor().getId()) + betterCommand.getCooldown() > System.currentTimeMillis())
                         return;
