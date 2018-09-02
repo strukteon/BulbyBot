@@ -1,3 +1,19 @@
+package me.strukteon.bettercommand;
+/*
+    Created by nils on 31.07.2018 at 22:34.
+    
+    (c) nils 2018
+*/
+
+import me.strukteon.bettercommand.command.*;
+import me.strukteon.bettercommand.syntax.Syntax;
+import me.strukteon.bettercommand.syntax.SyntaxBuilder;
+import me.strukteon.bettercommand.syntax.SyntaxHandler;
+import me.strukteon.bettercommand.syntax.SyntaxValidateException;
+import net.dv8tion.jda.core.Permission;
+import net.dv8tion.jda.core.entities.ChannelType;
+import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import java.util.Arrays;
