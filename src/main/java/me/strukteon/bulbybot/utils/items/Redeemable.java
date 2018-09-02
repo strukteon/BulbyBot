@@ -9,7 +9,11 @@ package me.strukteon.bulbybot.utils.items;
 public class Redeemable {
     private RedeemType redeemType;
 
-    private Redeemable(RedeemType type, Item item, int amount){ }
+    private Redeemable(RedeemType type, Item item, int amount){
+        this.redeemType = type;
+        this.item = item;
+        this.amount = amount;
+    }
 
     private Item item;
     private int amount;

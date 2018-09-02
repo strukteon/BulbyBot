@@ -43,6 +43,7 @@ public class Importer {
                         new ItemInfo(),
                         new Inventory(),
                         new Profile(),
+                        new Redeem(),
                         new Register(),
                         new Market(),
                         new Shop())
