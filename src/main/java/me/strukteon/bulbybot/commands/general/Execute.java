@@ -60,9 +60,14 @@ public class Execute implements ExtendedCommand {
                                 .put("versionIndex", versionCodes[codeIndex]).toString());
                 ResponseBody responseBody = client.newCall(new Request.Builder().post(requestBody).url(API_URL).build()).execute().body();
                 JSONObject res = new JSONObject(responseBody.string());
-                response.addField("Additional info:", String.format("CPU time: **%ss**\nMemory usage: **%skB**", res.getDouble("cpuTime"), res.getInt("memory")/1024), false)
-                        .addField("Output:", "```" + res.getString("output") + "```", false)
-                        .setFooter("Powered by JDoodle", author.getEffectiveAvatarUrl());
+                System.out.println(res.toString());
+                if (res.getInt("statusCode") == 200)
+                    response.addField("Additional info:", String.format("CPU time: **%ss**\nMemory usage: **%skB**", res.getDouble("cpuTime"), res.getInt("memory")/1024), false)
+                            .addField("Output:", "```" + res.getString("output") + "```", false);
+                else
+                    response.addField("Status code:", res.getInt("statusCode") + "", false)
+                            .addField("Output:", "```" + res.getString("output") + "```", false);
+                response.setFooter("Powered by JDoodle", author.getEffectiveAvatarUrl());
             } else {
                 response.setDescription("This language is not available. Please choose one of this list:\n```" + langs + "```");
             }
