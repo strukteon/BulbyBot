@@ -61,7 +61,7 @@ public class Execute implements ExtendedCommand {
                 ResponseBody responseBody = client.newCall(new Request.Builder().post(requestBody).url(API_URL).build()).execute().body();
                 JSONObject res = new JSONObject(responseBody.string());
                 if (res.getInt("statusCode") == 200)
-                    response.addField("Additional info:", String.format("CPU time: **%ss**\nMemory usage: **%skB**", res.get("cpuTime"), (res.get("memory") == null ? -1024 : res.getInt("memory"))/1024), false)
+                    response.addField("Additional info:", String.format("CPU time: **%ss**\nMemory usage: **%sB**", res.get("cpuTime"), res.get("memory")), false)
                             .addField("Output:", "```" + res.getString("output") + "```", false);
                 else
                     response.addField("Status code:", res.getInt("statusCode") + "", false)
