@@ -28,7 +28,7 @@ public class SyntaxValidator {
             case ID:
                 return validateId(toValidate);
             case USER:
-                return validateUser(toValidate, event.getJDA());
+                return validateUser(toValidate, event.getJDA(), event);
             case MEMBER:
                 return Checks.syntaxNotNull(() -> validateMember(toValidate, event.getGuild()), toValidate, event.getGuild());
             case GUILD:
@@ -76,7 +76,11 @@ public class SyntaxValidator {
         return toValidate;
     }
 
-    public User validateUser(String toValidate, JDA jda) throws SyntaxValidateException {
+    public User validateUser(String toValidate, JDA jda, MessageReceivedEvent event) throws SyntaxValidateException {
+        if (event.getChannelType().equals(ChannelType.TEXT))
+            try {
+                return validateMember(toValidate, event.getGuild()).getUser();
+            } catch (SyntaxValidateException ignored){ }
         if (!(CommandTools.isMention(toValidate) || CommandTools.isId(toValidate)))
             throw new SyntaxValidateException(SyntaxValidateException.Cause.INVALID);
         User user = jda.getUserById(CommandTools.mentionToId(toValidate));
