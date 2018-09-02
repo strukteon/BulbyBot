@@ -25,7 +25,7 @@ public class DefaultErrorHandler implements ErrorHandler {
     public void missingBotPermissions(CommandEvent event, List<Permission> missingPermissions, BaseCommand command) {
         EmbedBuilder eb = ChatTools.ERROR()
                 .setTitle("Missing Permissions")
-                .setDescription("Whoops, it seems like " + event.getJDA().getSelfUser().getAsMention() + " is missing some permissions! Please permit them to use this command: ``");
+                .setDescription("Whoops, it seems like " + event.getJDA().getSelfUser().getAsMention() + " is missing some permissions! Please permit them to use this command: ");
         for (Permission p : missingPermissions)
             eb.getDescriptionBuilder().append(eb.getDescriptionBuilder().length() > 0 ? ", " : "").append(p.getName());
         event.getChannel().sendMessage(eb.build()).queue();
@@ -35,7 +35,7 @@ public class DefaultErrorHandler implements ErrorHandler {
     public void missingUserPermissions(CommandEvent event, List<Permission> missingPermissions, BaseCommand command) {
         EmbedBuilder eb = ChatTools.ERROR()
                 .setTitle("Missing Permissions")
-                .setDescription("Whoops, it seems like you (" + event.getAuthor().getAsMention() + ") are missing some permissions! You need the following perms to execute this command: ``");
+                .setDescription("Whoops, it seems like you (" + event.getAuthor().getAsMention() + ") are missing some permissions! You need the following perms to execute this command: ");
         for (Permission p : missingPermissions)
             eb.getDescriptionBuilder().append(eb.getDescriptionBuilder().length() > 0 ? ", " : "").append(p.getName());
         eb.appendDescription("``");

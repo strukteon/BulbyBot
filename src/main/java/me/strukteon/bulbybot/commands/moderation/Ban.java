@@ -8,27 +8,23 @@ package me.strukteon.bulbybot.commands.moderation;
 
 import me.strukteon.bettercommand.CommandEvent;
 import me.strukteon.bettercommand.command.CommandInfo;
-import me.strukteon.bettercommand.command.ExtendedCommand;
+import me.strukteon.bettercommand.command.ExtendedGuildCommand;
 import me.strukteon.bettercommand.command.PermissionManager;
 import me.strukteon.bettercommand.syntax.Syntax;
 import me.strukteon.bettercommand.syntax.SyntaxBuilder;
 import me.strukteon.bettercommand.syntax.SyntaxElementType;
 import me.strukteon.bulbybot.utils.ChatTools;
 import me.strukteon.bulbybot.utils.PermissionsCheck;
-import me.strukteon.bulbybot.utils.Static;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.MessageChannel;
-import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.core.entities.*;
 
 import java.util.List;
 
-public class Ban implements ExtendedCommand {
+public class Ban implements ExtendedGuildCommand {
 
     @Override
-    public void onExecute(CommandEvent event, Syntax syntax, User author, MessageChannel channel) throws Exception {
+    public void onExecute(CommandEvent event, Syntax syntax, Member author, TextChannel channel) throws Exception {
 
         if (!(PermissionsCheck.hasPermission(event, event.getMember(), Permission.BAN_MEMBERS)))
             return;
@@ -46,16 +42,16 @@ public class Ban implements ExtendedCommand {
                 notBanned.append((notBanned.length() > 0 ? ", " : "") + member.getAsMention());
             }
             else {
-                guild.getController().ban(member, 0).reason("Command executed by " + author.getName()).queue();
+                guild.getController().ban(member, 0).reason("Command executed by " + author.getEffectiveName()).queue();
                 banned.append((banned.length() > 0 ? ", " : "") + member.getAsMention());
             }
 
         });
 
-        
+
 
         EmbedBuilder eb = ChatTools.INFO(author)
-            .setTitle("Ban-List");
+                .setTitle("Ban-List");
         if (notBanned.length() > 0)
             eb.setDescription("**Not banned members (you/I have no permissions)**\n"+notBanned);
         if (banned.length() > 0)
@@ -68,18 +64,17 @@ public class Ban implements ExtendedCommand {
     @Override
     public PermissionManager getPermissionManager() {
         return new PermissionManager()
-                .addRequiredUserPerms(Permission.BAN_MEMBERS)
-                .addRequiredBotPerms(Permission.BAN_MEMBERS);
+            .addRequiredUserPerms(Permission.BAN_MEMBERS)
+            .addRequiredBotPerms(Permission.BAN_MEMBERS);
     }
 
     @Override
     public CommandInfo getCommandInfo() {
         return new CommandInfo("ban")
-                .setHelp("Bans all mentioned users!")
-                .setSyntaxBuilder(
-                        new SyntaxBuilder()
-                                .addElement("users", SyntaxElementType.MEMBER, true)
-                );
+            .setHelp("Bans all mentioned users!")
+            .setSyntaxBuilder(
+                new SyntaxBuilder()
+                    .addElement("users", SyntaxElementType.MEMBER, true)
+            );
     }
-
 }

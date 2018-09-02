@@ -8,27 +8,23 @@ package me.strukteon.bulbybot.commands.moderation;
 
 import me.strukteon.bettercommand.CommandEvent;
 import me.strukteon.bettercommand.command.CommandInfo;
-import me.strukteon.bettercommand.command.ExtendedCommand;
+import me.strukteon.bettercommand.command.ExtendedGuildCommand;
 import me.strukteon.bettercommand.command.PermissionManager;
 import me.strukteon.bettercommand.syntax.Syntax;
 import me.strukteon.bettercommand.syntax.SyntaxBuilder;
 import me.strukteon.bettercommand.syntax.SyntaxElementType;
 import me.strukteon.bulbybot.utils.ChatTools;
 import me.strukteon.bulbybot.utils.PermissionsCheck;
-import me.strukteon.bulbybot.utils.Static;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.MessageChannel;
-import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.core.entities.*;
 
 import java.util.List;
 
-public class Kick implements ExtendedCommand {
+public class Kick implements ExtendedGuildCommand {
 
     @Override
-    public void onExecute(CommandEvent event, Syntax syntax, User author, MessageChannel channel) throws Exception {
+    public void onExecute(CommandEvent event, Syntax syntax, Member author, TextChannel channel) throws Exception {
 
         if (!(PermissionsCheck.hasPermission(event, event.getMember(), Permission.KICK_MEMBERS)))
             return;
@@ -46,16 +42,16 @@ public class Kick implements ExtendedCommand {
                 notKicked.append((notKicked.length() > 0 ? ", " : "") + member.getAsMention());
             }
             else {
-                guild.getController().kick(member).reason("Command executed by " + author.getName()).queue();
+                guild.getController().kick(member).reason("Command executed by " + author.getEffectiveName()).queue();
                 kicked.append((kicked.length() > 0 ? ", " : "") + member.getAsMention());
             }
 
         });
 
-        
+
 
         EmbedBuilder eb = ChatTools.INFO(author)
-            .setTitle("Kick-List");
+                .setTitle("Kick-List");
         if (notKicked.length() > 0)
             eb.setDescription("**Not kicked members (you/I have no permissions)**\n"+notKicked);
         if (kicked.length() > 0)
@@ -68,8 +64,8 @@ public class Kick implements ExtendedCommand {
     @Override
     public PermissionManager getPermissionManager() {
         return new PermissionManager()
-                .addRequiredUserPerms(Permission.KICK_MEMBERS)
-                .addRequiredBotPerms(Permission.KICK_MEMBERS);
+            .addRequiredUserPerms(Permission.KICK_MEMBERS)
+            .addRequiredBotPerms(Permission.KICK_MEMBERS);
     }
 
     @Override
@@ -81,5 +77,4 @@ public class Kick implements ExtendedCommand {
                     .addElement("users", SyntaxElementType.MEMBER, true)
             );
     }
-
 }
