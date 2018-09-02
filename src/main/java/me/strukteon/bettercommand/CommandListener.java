@@ -22,7 +22,7 @@ public class CommandListener extends ListenerAdapter {
         } else {
             prefix = betterCommand.getDefaultPrefix();
         }
-        boolean startsWithPrefix = event.getMessage().getContentRaw().startsWith("prefix);
+        boolean startsWithPrefix = event.getMessage().getContentRaw().startsWith(prefix);
         if (startsWithPrefix || event.getChannelType().equals(ChannelType.PRIVATE)) {
             commandEvent.setUsedPrefix(startsWithPrefix ? prefix : "");
             if (!betterCommand.getBlacklistedLoader().isChannelBlacklisted(event.getChannel().getIdLong()) || !betterCommand.getBlacklistedLoader().isUserBlacklisted(event.getAuthor().getIdLong()) || !event.getAuthor().isBot()) {
