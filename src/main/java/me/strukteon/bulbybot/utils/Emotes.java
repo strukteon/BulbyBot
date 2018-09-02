@@ -9,7 +9,7 @@ import me.strukteon.bulbybot.BulbyBot;
 import net.dv8tion.jda.core.entities.Emote;
 
 public enum Emotes {
-    SPINNER("482250261130248192")
+    SPINNER("484055620899831809")
     ;
 
     private String id;
