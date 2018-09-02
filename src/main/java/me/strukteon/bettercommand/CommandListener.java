@@ -25,7 +25,7 @@ public class CommandListener extends ListenerAdapter {
         boolean startsWithPrefix = event.getMessage().getContentRaw().startsWith(prefix);
         if (startsWithPrefix || event.getChannelType().equals(ChannelType.PRIVATE)) {
             commandEvent.setUsedPrefix(startsWithPrefix ? prefix : "");
-            if (!betterCommand.getBlacklistedLoader().isChannelBlacklisted(event.getChannel().getIdLong()) || !betterCommand.getBlacklistedLoader().isUserBlacklisted(event.getAuthor().getIdLong()) || !event.getAuthor().isBot()) {
+            if (!betterCommand.getBlacklistedLoader().isChannelBlacklisted(event.getChannel().getIdLong()) && !betterCommand.getBlacklistedLoader().isUserBlacklisted(event.getAuthor().getIdLong()) && !event.getAuthor().isBot()) {
                 if (betterCommand.getCooldown() != 0)
                     if (cooldowns.containsKey(event.getAuthor().getId()) && cooldowns.get(event.getAuthor().getId()) + betterCommand.getCooldown() > System.currentTimeMillis())
                         return;
