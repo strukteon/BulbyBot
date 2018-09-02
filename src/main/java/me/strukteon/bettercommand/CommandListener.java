@@ -1,7 +1,7 @@
 package me.strukteon.bettercommand;
 /*
     Created by nils on 31.07.2018 at 22:34.
-    
+
     (c) nils 2018
 */
 
@@ -62,7 +62,7 @@ public class CommandListener extends ListenerAdapter {
                             Member self = event.getGuild().getMember(event.getJDA().getSelfUser());
                             boolean success;
                             if (!(success = (author.hasPermission(Permission.ADMINISTRATOR) ||
-                                    event.getGuild().getOwner().getUser().getId().equals(author.getUser().getId()) ||
+                                    author.isOwner() ||
                                     author.hasPermission(c.getPermissionManager().getRequiredUserPerms()))))
                                 betterCommand.getErrorHandler().missingUserPermissions(commandEvent,
                                         CommandTools.getMissingPermissions(author.getPermissions(event.getTextChannel()), c.getPermissionManager().getRequiredUserPerms()),
