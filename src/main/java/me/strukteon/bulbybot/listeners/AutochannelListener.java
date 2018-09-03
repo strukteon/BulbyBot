@@ -47,13 +47,8 @@ public class AutochannelListener extends ListenerAdapter {
                         if (vc.getParent() != null)
                             nvc.getManager().setParent(vc.getParent()).queue();
 
-                        new Timer().schedule(new TimerTask() {
-                            @Override
-                            public void run() {
-                                guild.getController().modifyVoiceChannelPositions().selectPosition(nvc).moveTo(vc.getPosition() + 1).queue();
-                            }
-                        }, 100);
                         guild.getController().moveVoiceMember(event.getMember(), nvc).queue();
+                        guild.getController().modifyVoiceChannelPositions().selectPosition(nvc).moveTo(vc.getPosition() + 1).queue();
                         active.add(nvc);
 
                     });
@@ -85,13 +80,8 @@ public class AutochannelListener extends ListenerAdapter {
                         if (vcJoined.getParent() != null)
                             nvc.getManager().setParent(vcJoined.getParent()).queue();
 
-                        new Timer().schedule(new TimerTask() {
-                            @Override
-                            public void run() {
-                                guild.getController().modifyVoiceChannelPositions().selectPosition(nvc).moveTo(vcJoined.getPosition() + 1).queue();
-                            }
-                        }, 100);
                         guild.getController().moveVoiceMember(event.getMember(), nvc).queue();
+                        guild.getController().modifyVoiceChannelPositions().selectPosition(nvc).moveTo(vcJoined.getPosition() + 1).queue();
                         active.add(nvc);
 
                     });
