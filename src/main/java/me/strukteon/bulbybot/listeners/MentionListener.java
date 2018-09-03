@@ -19,7 +19,7 @@ public class MentionListener extends ListenerAdapter {
 
     public void onMessageReceived(MessageReceivedEvent event) {
 
-        if (event.getMessage().getMentionedMembers().size() == 0 || !event.getMessage().getContentDisplay().startsWith("@") || !event.getMessage().getMentionedMembers().get(0).getUser().getId().equals(event.getJDA().getSelfUser().getId()) || event.getAuthor().isBot())
+        if (event.getMessage().getMentionedUsers().size() == 0 || !event.getMessage().getContentDisplay().startsWith("@") || !event.getMessage().getMentionedUsers().get(0).getId().equals(event.getJDA().getSelfUser().getId()) || event.getAuthor().isBot())
             return;
 
         String prefix = Settings.INSTANCE.prefix;
