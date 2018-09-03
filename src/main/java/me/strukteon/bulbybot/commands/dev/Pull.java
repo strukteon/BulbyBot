@@ -9,7 +9,9 @@ package me.strukteon.bulbybot.commands.dev;
 import me.strukteon.bettercommand.CommandEvent;
 import me.strukteon.bettercommand.command.CommandInfo;
 import me.strukteon.bettercommand.command.ExtendedCommand;
+import me.strukteon.bettercommand.command.PermissionManager;
 import me.strukteon.bettercommand.syntax.Syntax;
+import me.strukteon.bulbybot.utils.Settings;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.User;
 
@@ -25,6 +27,12 @@ public class Pull implements ExtendedCommand {
 
         System.exit(0);
 
+    }
+
+    @Override
+    public PermissionManager getPermissionManager() {
+        return new PermissionManager()
+                .limitToUsers(Settings.INSTANCE.developers);
     }
 
     @Override
