@@ -46,7 +46,8 @@ public class Importer {
                         new Redeem(),
                         new Register(),
                         new Market(),
-                        new Shop())
+                        new Shop(),
+                        new Vote())
 
                 .addCommandSection("Devs only (don't even try)",
                         new AddItem(),
