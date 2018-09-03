@@ -20,7 +20,7 @@ public class Pull implements ExtendedCommand {
     @Override
     public void onExecute(CommandEvent event, Syntax syntax, User author, MessageChannel channel) throws Exception {
 
-        event.getTextChannel().sendMessage("Pulling started!").queue();
+        channel.sendMessage("Pulling started!").queue();
 
         ProcessBuilder builder = new ProcessBuilder("/home/bulbybot.sh");
         builder.start();
