@@ -20,7 +20,7 @@ import java.util.List;
 
 public class AutochannelListener extends ListenerAdapter {
 
-    private List<VoiceChannel> active = new ArrayList<>();
+    private List<String> active = new ArrayList<>();
 
 
     public void onGuildVoiceJoin(GuildVoiceJoinEvent event) {
@@ -49,7 +49,7 @@ public class AutochannelListener extends ListenerAdapter {
                         guild.getController().moveVoiceMember(event.getMember(), nvc).queue((callback) -> {
                             guild.getController().modifyVoiceChannelPositions().selectPosition(nvc).moveTo(vc.getPosition() + 1).queue();
                         });
-                        active.add(nvc);
+                        active.add(nvc.getId());
 
                     });
 
@@ -83,7 +83,7 @@ public class AutochannelListener extends ListenerAdapter {
                         guild.getController().moveVoiceMember(event.getMember(), nvc).queue((callback) -> {
                             guild.getController().modifyVoiceChannelPositions().selectPosition(nvc).moveTo(vcJoined.getPosition() + 1).queue();
                         });
-                        active.add(nvc);
+                        active.add(nvc.getId());
 
                     });
 
@@ -92,8 +92,8 @@ public class AutochannelListener extends ListenerAdapter {
 
         VoiceChannel vcLeft = event.getChannelLeft();
 
-        if (active.contains(vcLeft) && vcLeft.getMembers().size() == 0) {
-            active.remove(vcLeft);
+        if (active.contains(vcLeft.getId()) && vcLeft.getMembers().size() == 0) {
+            active.remove(vcLeft.getId());
             vcLeft.delete().queue();
         }
 
@@ -102,8 +102,8 @@ public class AutochannelListener extends ListenerAdapter {
     public void onGuildVoiceLeave(GuildVoiceLeaveEvent event) {
         VoiceChannel vc = event.getChannelLeft();
 
-        if (active.contains(vc) && vc.getMembers().size() == 0) {
-            active.remove(vc);
+        if (active.contains(vc.getId()) && vc.getMembers().size() == 0) {
+            active.remove(vc.getId());
             vc.delete().queue();
         }
     }
