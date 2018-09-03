@@ -17,8 +17,6 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class AutochannelListener extends ListenerAdapter {
 
@@ -44,11 +42,16 @@ public class AutochannelListener extends ListenerAdapter {
                         else
                             nvc.putPermissionOverride(member).setAllow(Permission.MANAGE_CHANNEL).queue();
 
-                        if (vc.getParent() != null)
-                            nvc.getManager().setParent(vc.getParent()).queue();
+                        if (vc.getParent() != null) {
+                            nvc.getManager().setParent(vc.getParent()).queue((callback) -> {
+                                guild.getController().modifyVoiceChannelPositions().selectPosition(nvc).moveTo(vc.getPosition() + 1).queue();
+                            });
+                        }
+                        else
+                            guild.getController().modifyVoiceChannelPositions().selectPosition(nvc).moveTo(vc.getPosition() + 1).queue();
+
 
                         guild.getController().moveVoiceMember(event.getMember(), nvc).queue();
-                        guild.getController().modifyVoiceChannelPositions().selectPosition(nvc).moveTo(vc.getPosition() + 1).queue();
                         active.add(nvc);
 
                     });
@@ -77,8 +80,13 @@ public class AutochannelListener extends ListenerAdapter {
                         else
                             nvc.putPermissionOverride(member).setAllow(Permission.MANAGE_CHANNEL).queue();
 
-                        if (vcJoined.getParent() != null)
-                            nvc.getManager().setParent(vcJoined.getParent()).queue();
+                        if (vcJoined.getParent() != null) {
+                            nvc.getManager().setParent(vcJoined.getParent()).queue((callback) -> {
+                                guild.getController().modifyVoiceChannelPositions().selectPosition(nvc).moveTo(vcJoined.getPosition() + 1).queue();
+                            });
+                        }
+                        else
+                            guild.getController().modifyVoiceChannelPositions().selectPosition(nvc).moveTo(vcJoined.getPosition() + 1).queue();
 
                         guild.getController().moveVoiceMember(event.getMember(), nvc).queue();
                         guild.getController().modifyVoiceChannelPositions().selectPosition(nvc).moveTo(vcJoined.getPosition() + 1).queue();
