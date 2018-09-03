@@ -39,6 +39,7 @@ public class Importer {
                         new Balance(),
                         new Daily(),
                         new Gift(),
+                        new Pay(),
                         new ItemInfo(),
                         new Inventory(),
                         new Profile(),
