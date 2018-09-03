@@ -38,6 +38,7 @@ public class Importer {
                 .addCommandSection("Money",
                         new Balance(),
                         new Daily(),
+                        new Gift(),
                         new ItemInfo(),
                         new Inventory(),
                         new Profile(),
