@@ -11,10 +11,7 @@ import me.strukteon.bulbybot.commands.dev.AddMoney;
 import me.strukteon.bulbybot.commands.dev.Pull;
 import me.strukteon.bulbybot.commands.dev.ThrowException;
 import me.strukteon.bulbybot.commands.general.*;
-import me.strukteon.bulbybot.commands.moderation.Autorole;
-import me.strukteon.bulbybot.commands.moderation.Ban;
-import me.strukteon.bulbybot.commands.moderation.Kick;
-import me.strukteon.bulbybot.commands.moderation.Prefix;
+import me.strukteon.bulbybot.commands.moderation.*;
 import me.strukteon.bulbybot.commands.money.*;
 import me.strukteon.bulbybot.listeners.*;
 import net.dv8tion.jda.bot.sharding.DefaultShardManagerBuilder;
@@ -27,7 +24,8 @@ public class Importer {
                         new Autorole(),
                         new Prefix(),
                         new Ban(),
-                        new Kick())
+                        new Kick(),
+                        new Autochannel())
 
                 .addCommandSection("General",
                         new About(),
@@ -64,7 +62,8 @@ public class Importer {
                         new ReactionAddListener(),
                         new XPListener(),
                         new Autorole(),
-                        new MentionListener()
+                        new MentionListener(),
+                        new AutochannelListener()
                 );
 
     }
