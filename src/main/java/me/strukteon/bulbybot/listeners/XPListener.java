@@ -5,8 +5,10 @@ package me.strukteon.bulbybot.listeners;
     (c) nils 2018
 */
 
+import me.strukteon.bulbybot.core.sql.GuildSQL;
 import me.strukteon.bulbybot.core.sql.UserSQL;
 import me.strukteon.bulbybot.utils.LevelSystem;
+import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
@@ -21,7 +23,8 @@ public class XPListener extends ListenerAdapter {
         User author = event.getAuthor();
         if (UserSQL.existsFromUser(author)) {
             UserSQL userSQL = UserSQL.fromUser(author);
-            userSQL.addXp(LevelSystem.getXp(event.getMessage().getContentRaw().length()));
+            if (!event.isFromType(ChannelType.TEXT) || GuildSQL.fromGuild(event.getGuild()).isLevelingEnabled())
+                userSQL.addXp(LevelSystem.getXp(event.getMessage().getContentRaw().length()));
             if (!cooldown.containsKey(author.getId()) || cooldown.get(author.getId()) < System.currentTimeMillis() - 10000) {
                 if (!cooldown.containsKey(author.getId()))
                     cooldown.put(author.getId(), System.currentTimeMillis());

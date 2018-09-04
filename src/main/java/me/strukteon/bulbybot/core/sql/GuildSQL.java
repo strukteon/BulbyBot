@@ -78,6 +78,10 @@ public class GuildSQL {
         }
     }
 
+    public boolean isLevelingEnabled(){
+        return mySQL.SELECT("*", table, "id='"+guildid+"'").get("leveling").equals("1");
+    }
+
 
     public void setPrefix(String prefix){
         mySQL.UPDATE(table, "prefix='"+prefix+"'", "id='"+guildid+"'");
@@ -89,6 +93,10 @@ public class GuildSQL {
 
     public void setAutoRoles(List<Role> roles){
         setAutoRoles(roles.stream().map(Role::getId).toArray(String[]::new));
+    }
+
+    public void setLevelingEnabled(boolean enabled){
+        mySQL.UPDATE(table, "leveling=" + (enabled ? 1 : 0), "id="+guildid);
     }
 
     public void setWelcomeChannel(String textChannelId){
