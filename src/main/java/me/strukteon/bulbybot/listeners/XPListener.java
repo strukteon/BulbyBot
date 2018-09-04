@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class XPListener extends ListenerAdapter {
-    private static Map<String, Long> cooldown = new HashMap<>();
+    private Map<String, Long> cooldown = new HashMap<>();
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         User author = event.getAuthor();
@@ -23,7 +23,10 @@ public class XPListener extends ListenerAdapter {
             UserSQL userSQL = UserSQL.fromUser(author);
             userSQL.addXp(LevelSystem.getXp(event.getMessage().getContentRaw().length()));
             if (!cooldown.containsKey(author.getId()) || cooldown.get(author.getId()) < System.currentTimeMillis() - 10000) {
-                cooldown.replace(author.getId(), System.currentTimeMillis());
+                if (!cooldown.containsKey(author.getId()))
+                    cooldown.put(author.getId(), System.currentTimeMillis());
+                else
+                    cooldown.replace(author.getId(), System.currentTimeMillis());
                 userSQL.addMoney(1);
             }
         }
