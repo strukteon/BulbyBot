@@ -50,9 +50,11 @@ public class CommandListener extends ListenerAdapter {
                 String[] args = splitted.length > 1 ? Arrays.copyOfRange(splitted, 1, splitted.length) : new String[0];
                 for (BaseCommand c : betterCommand.getCommands())
                     if (c.getCommandInfo().getLabel().equals(command) || c.getCommandInfo().getAliases().contains(command)) {
-                        if (c.getCommandInfo().getCooldown() != 0)
+                        if (c.getCommandInfo().getCooldown() != 0) {
                             if (cooldowns.containsKey(event.getAuthor().getId()) && cooldowns.get(event.getAuthor().getId()) + c.getCommandInfo().getCooldown() > System.currentTimeMillis())
                                 return;
+                            cooldowns.put(event.getAuthor().getId(), System.currentTimeMillis());
+                        }
                         if (!(c.getPermissionManager().getLimitedUsers().size() == 0 || c.getPermissionManager().getLimitedUsers().contains(event.getAuthor().getId()))) {
                             betterCommand.getErrorHandler().notInUserlist(commandEvent, c);
                             return;
