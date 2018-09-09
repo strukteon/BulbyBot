@@ -81,6 +81,17 @@ public class BulbyBot {
                         GuildSQL guildSQL = GuildSQL.fromGuildId(guildId + "");
                         return guildSQL.getPrefix();
                     })
+                    .setBlacklistedLoader(new Loader.Blacklisted() {
+                        @Override
+                        public boolean isUserBlacklisted(long userId) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean isChannelBlacklisted(long channelId) {
+                            return getShardManager().getTextChannelById(channelId).getTopic().toLowerCase().contains("[no-cmd]");
+                        }
+                    })
                     .useDefaultHelpMessage("help", Color.decode("#7BFF2E"), "?")
                     .useShardManager(shardManager)
                     .setCooldown(200)
