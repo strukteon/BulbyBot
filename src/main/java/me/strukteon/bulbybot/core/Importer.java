@@ -26,6 +26,7 @@ public class Importer {
                         new Ban(),
                         new Kick(),
                         new Autochannel(),
+                        new Clear(),
                         new Leveling())
 
                 .addCommandSection("General",
