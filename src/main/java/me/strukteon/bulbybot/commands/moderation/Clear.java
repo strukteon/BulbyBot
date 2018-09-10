@@ -88,7 +88,7 @@ public class Clear implements ExtendedGuildCommand {
                 .setHelp("Clears the given amount of messages.")
                 .setSyntaxBuilder(
                         new SyntaxBuilder()
-                        .addElement("number", SyntaxElementType.INT, false)
+                        .addElement("number", SyntaxElementType.INT)
                 );
     }
 
