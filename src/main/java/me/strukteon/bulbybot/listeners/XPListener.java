@@ -25,7 +25,7 @@ public class XPListener extends ListenerAdapter {
             UserSQL userSQL = UserSQL.fromUser(author);
             if (!event.isFromType(ChannelType.TEXT) || GuildSQL.fromGuild(event.getGuild()).isLevelingEnabled())
                 userSQL.addXp(LevelSystem.getXp(event.getMessage().getContentRaw().length()));
-            if (!cooldown.containsKey(author.getId()) || cooldown.get(author.getId()) < System.currentTimeMillis() - 10000) {
+            if (!cooldown.containsKey(author.getId()) || cooldown.get(author.getId()) < System.currentTimeMillis() - 60000) {
                 if (!cooldown.containsKey(author.getId()))
                     cooldown.put(author.getId(), System.currentTimeMillis());
                 else
