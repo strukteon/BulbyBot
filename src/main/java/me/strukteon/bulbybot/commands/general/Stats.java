@@ -17,6 +17,9 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.User;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
@@ -36,8 +39,10 @@ public class Stats implements ExtendedCommand {
         CentralProcessor processor = hardware.getProcessor();
         OperatingSystemMXBean operatingSystemMXBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
         DecimalFormat df = new DecimalFormat("###.##");
+        OkHttpClient client = new OkHttpClient();
+        Response commit = client.newCall(new Request.Builder().url("http://whatthecommit.com/index.txt").get().build()).execute();
 
-        eb.setDescription(String.format("Online for: **%s**\nGuilds: **%s**\nLatency: **%sms**\nRegistered users: **%s**\nAll users: **%s**\nCPU usage: **%s%%**, **%s%%** available\nRAM usage: **%sMB**, **%sGB** available\nShard: **%s** / **%s**",
+        eb.setDescription(String.format("Online for: **%s**\nGuilds: **%s**\nLatency: **%sms**\nRegistered users: **%s**\nAll users: **%s**\nCPU usage: **%s%%**, **%s%%** available\nRAM usage: **%sMB**, **%sGB** available\nShard: **%s** / **%s**\nMost recent commit:\n```css\n%s\n```",
                 onlineTime(System.currentTimeMillis() - BulbyBot.getStartTime()),
                 BulbyBot.getShardManager().getGuilds().size(),
                 BulbyBot.getShardManager().getAveragePing(),
@@ -45,7 +50,8 @@ public class Stats implements ExtendedCommand {
                 BulbyBot.getShardManager().getUsers().size(),
                 df.format(operatingSystemMXBean.getProcessCpuLoad()*100), df.format((1.0 - processor.getSystemCpuLoad())*100),
                 df.format((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / Math.pow(1024, 2)), df.format(memory.getAvailable() / Math.pow(1024, 3)),
-                shardInfo.getShardId()+1, shardInfo.getShardTotal()));
+                shardInfo.getShardId()+1, shardInfo.getShardTotal(),
+                commit.body().string()));
         System.out.println(System.currentTimeMillis() - BulbyBot.getStartTime());
 
         channel.sendMessage(eb.build()).queue();
