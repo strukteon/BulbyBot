@@ -5,12 +5,16 @@ package me.strukteon.bulbybot.utils;
     (c) nils 2018
 */
 
+import me.strukteon.bulbybot.BulbyBot;
+import me.strukteon.bulbybot.core.sql.UserSQL;
+import net.dv8tion.jda.bot.sharding.ShardManager;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.function.Consumer;
 
 public class CoolStatus extends Thread {
     private Timer timer;
@@ -19,12 +23,22 @@ public class CoolStatus extends Thread {
 
     private JDA jda;
 
-    private String[] msgs = {
-            "working on it!",
-            "strukteon.me/bulby",
-            "patreon.com/strukteon",
-            "Much wow",
-            "Fun included!"
+    private StatusMessage[] msgs = {
+            s -> "Working on it!",
+            s -> "inv.bulby.xyz",
+            s -> "donate.bulby.xyz",
+            s -> "Much wow",
+            s -> "Fun included!",
+            s -> "It's a feature, not a bug!",
+            s -> "Hunting bugs",
+            s -> "Generating Bitcoins",
+            s -> s.getGuilds().size() + " Guilds",
+            s -> UserSQL.getTotalUserSize() + " Registered Users",
+            s -> s.getUsers().size() + " Total users",
+            s -> "What do I do again?",
+            s -> "beep boop",
+            s -> "Is this thing on?",
+            s -> "Collecting taxes"
     };
 
     public CoolStatus(JDA jda){
@@ -47,9 +61,7 @@ public class CoolStatus extends Thread {
     }
 
     private void update(){
-        String msg = msgs[cur];
-        msg = msg   .replace("{%GUILDS%}", ""+jda.getGuilds().size())
-                    .replace("{%USERS%}", ""+jda.getUsers().size());
+        String msg = msgs[cur].generate(BulbyBot.getShardManager());
         jda.getPresence().setPresence(Game.playing(Settings.INSTANCE.prefix + "help | " + msg), false);
         cur++;
         if (cur == msgs.length)
@@ -72,6 +84,10 @@ public class CoolStatus extends Thread {
             }
             return OnlineStatus.ONLINE;
         }
+    }
+
+    private interface StatusMessage {
+        String generate(ShardManager shardManager);
     }
 
 }
