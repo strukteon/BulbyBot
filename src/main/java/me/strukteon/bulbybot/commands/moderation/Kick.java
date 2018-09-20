@@ -14,7 +14,6 @@ import me.strukteon.bettercommand.syntax.Syntax;
 import me.strukteon.bettercommand.syntax.SyntaxBuilder;
 import me.strukteon.bettercommand.syntax.SyntaxElementType;
 import me.strukteon.bulbybot.utils.ChatTools;
-import me.strukteon.bulbybot.utils.PermissionsCheck;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.*;
@@ -25,9 +24,6 @@ public class Kick implements ExtendedGuildCommand {
 
     @Override
     public void onExecute(CommandEvent event, Syntax syntax, Member author, TextChannel channel) throws Exception {
-
-        if (!(PermissionsCheck.hasPermission(event, event.getMember(), Permission.KICK_MEMBERS)))
-            return;
 
         List<Member> mentionedMembers = syntax.getAsListMember("users");
         Guild guild = event.getGuild();
