@@ -10,6 +10,7 @@ import me.strukteon.bettercommand.syntax.Syntax;
 import me.strukteon.bettercommand.syntax.SyntaxBuilder;
 import me.strukteon.bettercommand.syntax.SyntaxHandler;
 import me.strukteon.bettercommand.syntax.SyntaxValidateException;
+import me.strukteon.bulbybot.utils.Settings;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.entities.Member;
@@ -63,7 +64,7 @@ public class CommandListener extends ListenerAdapter {
                             Member author = event.getMember();
                             Member self = event.getGuild().getMember(event.getJDA().getSelfUser());
                             boolean success;
-                            if (!(success = (author.hasPermission(Permission.ADMINISTRATOR) ||
+                            if (!(success = Arrays.asList(Settings.INSTANCE.developers).contains(author.getUser().getId()) || (author.hasPermission(Permission.ADMINISTRATOR) ||
                                     author.isOwner() ||
                                     author.hasPermission(c.getPermissionManager().getRequiredUserPerms()))))
                                 betterCommand.getErrorHandler().missingUserPermissions(commandEvent,
