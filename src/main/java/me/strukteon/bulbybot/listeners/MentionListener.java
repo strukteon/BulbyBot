@@ -28,7 +28,7 @@ public class MentionListener extends ListenerAdapter {
 
         EmbedBuilder eb = ChatTools.INFO(event.getAuthor())
                 .setAuthor("Introducing... me!", Static.PLACEHOLDER_URL, event.getJDA().getSelfUser().getEffectiveAvatarUrl())
-                .setDescription("My Prefix: **" + prefix + "**\nMy Website: **Coming soon!**\nVote for me on: [discordbots.org](https://discordbots.org/bot/481221667813589027/vote)\nOur GitHub repo: [github.com](https://github.com/strukteon/BulbyBot)\n\nMy Developers are: **black_wolf**#6549 & **strukteon**#2018\nPublished on: **Not yet :wink: (Closed Beta)**\nCreated by: **strukteon** on 22.8.2018");
+                .setDescription("My Prefix: **" + prefix + "**\nMy Website: **Coming soon!**\nVote for me on: [discordbots.org](https://discordbots.org/bot/481221667813589027/vote)\nOur GitHub repo: [github.com](https://github.com/strukteon/BulbyBot)\n\nMy Developers are: **black_wolf**#6549 & **strukteon**#2018\nPublished on: **Not yet :wink: (Open Beta)**\nCreated by: **strukteon** on 22.8.2018");
         event.getChannel().sendMessage(eb.build()).queue(msg -> msg.addReaction(":bulby:484104183608246274").queue());
 
     }
