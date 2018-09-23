@@ -6,9 +6,9 @@ package me.strukteon.bulbybot.commands.moderation;
 */
 
 import me.strukteon.bettercommand.CommandEvent;
-import me.strukteon.bettercommand.command.CommandInfo;
+import me.strukteon.bettercommand.tools.CommandInfo;
 import me.strukteon.bettercommand.command.ExtendedGuildCommand;
-import me.strukteon.bettercommand.command.PermissionManager;
+import me.strukteon.bettercommand.tools.PermissionManager;
 import me.strukteon.bettercommand.syntax.Syntax;
 import me.strukteon.bettercommand.syntax.SyntaxBuilder;
 import me.strukteon.bettercommand.syntax.SyntaxElementType;

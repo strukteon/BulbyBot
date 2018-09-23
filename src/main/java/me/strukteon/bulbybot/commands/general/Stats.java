@@ -7,7 +7,7 @@ package me.strukteon.bulbybot.commands.general;
 
 import com.sun.management.OperatingSystemMXBean;
 import me.strukteon.bettercommand.CommandEvent;
-import me.strukteon.bettercommand.command.CommandInfo;
+import me.strukteon.bettercommand.tools.CommandInfo;
 import me.strukteon.bettercommand.command.ExtendedCommand;
 import me.strukteon.bettercommand.syntax.Syntax;
 import me.strukteon.bulbybot.BulbyBot;

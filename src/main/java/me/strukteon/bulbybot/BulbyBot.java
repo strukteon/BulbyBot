@@ -6,11 +6,12 @@ package me.strukteon.bulbybot;
 */
 
 import me.strukteon.bettercommand.BetterCommand;
-import me.strukteon.bettercommand.command.Loader;
+import me.strukteon.bettercommand.tools.Loader;
 import me.strukteon.bulbybot.core.CLI;
 import me.strukteon.bulbybot.core.Importer;
 import me.strukteon.bulbybot.core.sql.GuildSQL;
 import me.strukteon.bulbybot.core.threading.RenderThread;
+import me.strukteon.bulbybot.utils.ChatTools;
 import me.strukteon.bulbybot.utils.Settings;
 import net.dv8tion.jda.bot.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.bot.sharding.ShardManager;
@@ -92,7 +93,8 @@ public class BulbyBot {
                             return getShardManager().getTextChannelById(channelId).getTopic().toLowerCase().contains("[no-cmd]");
                         }
                     })
-                    .useDefaultHelpMessage("help", Color.decode("#7BFF2E"), "?")
+                    .setSuperusers(Settings.INSTANCE.developers)
+                    .useDefaultHelpMessage("help", e -> ChatTools.INFO(e.getAuthor()), "?")
                     .useShardManager(shardManager)
                     .setCooldown(200)
                     .enable();

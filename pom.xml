@@ -102,9 +102,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>okhttp</artifactId>
-            <version>3.11.0</version>
+            <groupId>me.strukteon</groupId>
+            <artifactId>BetterCommand</artifactId>
+            <version>1.0.5</version>
         </dependency>
 
     </dependencies>

@@ -126,6 +126,10 @@ public enum Item {
     }
 
 
+    public static Item getItemById(Integer id){
+        return getItemById(id);
+    }
+
     public static Item getItemById(int id){
         Item[] items = Item.values();
         for (Item i : items)
