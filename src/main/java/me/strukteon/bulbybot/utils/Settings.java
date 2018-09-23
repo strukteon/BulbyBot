@@ -30,6 +30,8 @@ public class Settings {
 
     public MySqlSettings mySqlSettings = new MySqlSettings();
 
+    public String githubParams = "";
+
     public String jDoodleClientId = "";
     public String jDoodleClientSecret = "";
 

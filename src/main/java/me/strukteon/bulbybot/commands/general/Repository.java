@@ -10,6 +10,7 @@ import me.strukteon.bettercommand.tools.CommandInfo;
 import me.strukteon.bettercommand.command.ExtendedCommand;
 import me.strukteon.bettercommand.syntax.Syntax;
 import me.strukteon.bulbybot.utils.ChatTools;
+import me.strukteon.bulbybot.utils.Settings;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.User;
@@ -26,10 +27,11 @@ import java.util.List;
 public class Repository implements ExtendedCommand {
     @Override
     public void onExecute(CommandEvent event, Syntax syntax, User author, MessageChannel channel) throws Exception {
-        URL url = new URL("https://api.github.com/repos/strukteon/bulbybot/stats/contributors");
+        URL url = new URL("https://api.github.com/repos/strukteon/bulbybot/stats/contributors" + Settings.INSTANCE.githubParams);
         OkHttpClient client = new OkHttpClient();
         Response response = client.newCall(new Request.Builder().url(url).get().build()).execute();
         String responseString = response.body().string();
+        System.out.println(responseString);
         JSONArray stats = new JSONArray(responseString);
         int additionsTotal = 0;
         int deletionsTotal = 0;
