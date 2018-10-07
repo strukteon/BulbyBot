@@ -22,4 +22,4 @@ That what you've read up to now is not all I can do! Besides from economy, there
 
 Here you see a list of all his commands:
 
-![help](https://cdn.discordapp.com/attachments/473051981447954462/486276599428153348/unknown.png)
+![help](https://imgur.com/6Pl0DKT)
