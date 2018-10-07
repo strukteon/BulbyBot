@@ -104,7 +104,7 @@
         <dependency>
             <groupId>me.strukteon</groupId>
             <artifactId>BetterCommand</artifactId>
-            <version>1.0.5</version>
+            <version>1.0.9</version>
         </dependency>
 
     </dependencies>
