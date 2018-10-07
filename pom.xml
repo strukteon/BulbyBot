@@ -48,6 +48,11 @@
             <url>https://jitpack.io</url>
         </repository>
 
+        <repository>
+            <id>bintray</id>
+            <url>https://dl.bintray.com/strukteon/BetterCommand</url>
+        </repository>
+
     </repositories>
 
 
