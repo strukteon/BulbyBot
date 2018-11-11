@@ -20,4 +20,6 @@ With your coins you can buy items like backgrounds for your profile, embed color
 ## All commands
 That what you've read up to now is not all I can do! Besides from economy, there's much more!
 
-Here you see a list of all his commands: ![help](https://cdn.discordapp.com/attachments/473051981447954462/498497265984471042/unknown.png)
+Here you see a list of all his commands:
+
+![help](https://cdn.discordapp.com/attachments/473051981447954462/498497265984471042/unknown.png)
